@@ -1,2 +1,14 @@
 var requireDirectory = require('require-directory');
-module.exports = requireDirectory(module);
+const queries = requireDirectory(module);
+
+module.exports = ({ resolvers, ...dependencies }) =>
+  Object.keys(queries).reduce(
+    (acc, key) => ({
+      ...acc,
+      [key]: {
+        ...queries[key](dependencies),
+        resolve: resolvers[key],
+      },
+    }),
+    {},
+  );

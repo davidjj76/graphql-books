@@ -1,9 +1,6 @@
 const { GraphQLList } = require('graphql');
-const { author } = require('../types');
-const { getAuthors } = require('../resolvers');
 
-module.exports = {
+module.exports = ({ resolvers, types }) => ({
   description: 'Gets all authors',
-  type: new GraphQLList(author),
-  resolve: getAuthors,
-};
+  type: new GraphQLList(types.author),
+});

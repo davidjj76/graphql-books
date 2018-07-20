@@ -1,12 +1,9 @@
-const { GraphQLID, GraphQLNonNull } = require('graphql');
-const { author } = require('../types');
-const { getAuthor } = require('../resolvers');
+const { GraphQLNonNull, GraphQLID } = require('graphql');
 
-module.exports = {
+module.exports = ({ resolvers, types }) => ({
   description: 'Gets an author by id',
-  type: author,
+  type: types.author,
   args: {
     id: { type: new GraphQLNonNull(GraphQLID) },
   },
-  resolve: getAuthor,
-};
+});

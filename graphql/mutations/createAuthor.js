@@ -1,12 +1,9 @@
 const { GraphQLNonNull, GraphQLString } = require('graphql');
-const { author } = require('../types');
-const { createAuthor } = require('../resolvers');
 
-module.exports = {
+module.exports = ({ resolvers, types }) => ({
   description: 'Creates an author',
-  type: author,
+  type: types.author,
   args: {
     name: { type: new GraphQLNonNull(GraphQLString) },
   },
-  resolve: createAuthor,
-};
+});

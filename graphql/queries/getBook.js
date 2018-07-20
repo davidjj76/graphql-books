@@ -1,12 +1,9 @@
-const { GraphQLID, GraphQLNonNull } = require('graphql');
-const { book } = require('../types');
-const { getBook } = require('../resolvers');
+const { GraphQLNonNull, GraphQLID } = require('graphql');
 
-module.exports = {
+module.exports = ({ resolvers, types }) => ({
   description: 'Gets a book by id',
-  type: book,
+  type: types.book,
   args: {
     id: { type: new GraphQLNonNull(GraphQLID) },
   },
-  resolve: getBook,
-};
+});
