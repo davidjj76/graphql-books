@@ -1,6 +1,7 @@
 const {
   GraphQLID,
   GraphQLInt,
+  GraphQLNonNull,
   GraphQLObjectType,
   GraphQLString,
 } = require('graphql');
@@ -13,13 +14,13 @@ module.exports = new GraphQLObjectType({
   fields: () => {
     const author = require('./author');
     return {
-      id: { type: GraphQLID },
-      title: { type: GraphQLString },
+      id: { type: new GraphQLNonNull(GraphQLID) },
+      title: { type: new GraphQLNonNull(GraphQLString) },
       author: {
-        type: author,
+        type: new GraphQLNonNull(author),
         resolve: getAuthor,
       },
-      pages: { type: GraphQLInt },
+      pages: { type: new GraphQLNonNull(GraphQLInt) },
     };
   },
 });
