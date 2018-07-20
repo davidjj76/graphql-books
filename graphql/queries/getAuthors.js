@@ -3,7 +3,7 @@ const { author } = require('../types');
 const { getAuthors } = require('../resolvers');
 
 module.exports = {
-  description: 'Get all authors',
+  description: 'Gets all authors',
   type: new GraphQLList(author),
   resolve: getAuthors,
 };

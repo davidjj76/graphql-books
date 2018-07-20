@@ -3,7 +3,7 @@ const { book } = require('../types');
 const { getBook } = require('../resolvers');
 
 module.exports = {
-  description: 'Get a book by id',
+  description: 'Gets a book by id',
   type: book,
   args: {
     id: { type: new GraphQLNonNull(GraphQLID) },

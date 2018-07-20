@@ -3,7 +3,7 @@ const { author } = require('../types');
 const { getAuthor } = require('../resolvers');
 
 module.exports = {
-  description: 'Get an author by id',
+  description: 'Gets an author by id',
   type: author,
   args: {
     id: { type: new GraphQLNonNull(GraphQLID) },
