@@ -5,16 +5,21 @@ const {
   GraphQLString,
 } = require('graphql');
 
-const author = require('./author');
 const { getAuthor } = require('../resolvers');
 
 module.exports = new GraphQLObjectType({
   name: 'Book',
   description: 'Describes a book type',
-  fields: {
-    id: { type: GraphQLID },
-    title: { type: GraphQLString },
-    author: { type: author, resolve: getAuthor },
-    pages: { type: GraphQLInt },
+  fields: () => {
+    const author = require('./author');
+    return {
+      id: { type: GraphQLID },
+      title: { type: GraphQLString },
+      author: {
+        type: author,
+        resolve: getAuthor,
+      },
+      pages: { type: GraphQLInt },
+    };
   },
 });
