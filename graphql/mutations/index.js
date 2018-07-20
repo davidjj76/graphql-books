@@ -1,4 +1,4 @@
-var requireDirectory = require('require-directory');
+const requireDirectory = require('require-directory');
 const mutations = requireDirectory(module);
 
 module.exports = ({ resolvers, ...dependencies }) =>
