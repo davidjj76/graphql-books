@@ -1,4 +1,4 @@
-module.exports = ({ connection, types, dependencies }) =>
+module.exports = ({ connection, types, dependencies: { uuid } }) =>
   connection.define(
     'book',
     {
@@ -6,7 +6,7 @@ module.exports = ({ connection, types, dependencies }) =>
         allowNull: false,
         primaryKey: true,
         type: types.UUID,
-        defaultValue: dependencies.uuid,
+        defaultValue: uuid,
       },
       title: {
         allowNull: false,

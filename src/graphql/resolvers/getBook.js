@@ -1,1 +1,1 @@
-module.exports = (_, args, context) => context.data.book.findById(args.id);
+module.exports = (_, { id }, { data }) => data.book.findById(id);

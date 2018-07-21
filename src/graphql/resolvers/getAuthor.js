@@ -1,4 +1,4 @@
-module.exports = (book, args, context) => {
-  const authorId = book ? book.authorId : args.id;
-  return context.data.author.findById(authorId);
+module.exports = (book, { id }, { data }) => {
+  const authorId = book ? book.authorId : id;
+  return data.author.findById(authorId);
 };

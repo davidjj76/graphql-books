@@ -1,4 +1,4 @@
-module.exports = (obj, args) =>
+module.exports = obj => args =>
   Object.keys(obj).reduce(
     (acc, key) => ({
       ...acc,

@@ -1,4 +1,4 @@
-module.exports = (author, __, context) => {
-  const options = author && { authorId: author.id };
-  return context.data.book.findAll(options);
+module.exports = (author, __, { data }) => {
+  const options = author && { where: { authorId: author.id } };
+  return data.book.findAll(options);
 };
