@@ -12,7 +12,7 @@ module.exports = connectionString => {
 
   // attach models
   modelsReductor({
-    connection: sequelize,
+    define: sequelize.define.bind(sequelize),
     types: Sequelize,
     dependencies: { uuid },
   });
