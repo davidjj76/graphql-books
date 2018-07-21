@@ -2,7 +2,7 @@ const express = require('express');
 const graphqlHTTP = require('express-graphql');
 const bodyParser = require('body-parser');
 const schema = require('./graphql/schema');
-const data = require('./data');
+const data = require('./db')('sqlite:./db/books.sqlite');
 
 const app = express();
 app.use(bodyParser.json());
