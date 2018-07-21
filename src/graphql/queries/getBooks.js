@@ -2,6 +2,6 @@ const { GraphQLList } = require('graphql');
 
 module.exports = ({ resolvers, types }) => ({
   description: 'Gets all books',
-  type: new GraphQLList(types.basic.book),
+  type: new GraphQLList(types.book),
   resolve: resolvers.getBooks,
 });

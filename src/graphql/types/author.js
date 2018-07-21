@@ -6,7 +6,7 @@ const {
   GraphQLString,
 } = require('graphql');
 
-const { getBooks } = require('../../resolvers');
+const { getBooks } = require('../resolvers');
 
 module.exports = new GraphQLObjectType({
   name: 'Author',
