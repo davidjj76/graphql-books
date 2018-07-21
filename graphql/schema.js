@@ -2,23 +2,23 @@ const { GraphQLObjectType, GraphQLSchema } = require('graphql');
 
 const resolvers = require('./resolvers');
 const types = require('./types');
-const { typeReductor } = require('./utils');
+const { objReductor } = require('../utils');
 
-const queryReductor = typeReductor(require('./queries'));
-const mutationReductor = typeReductor(require('./mutations'));
+const queries = require('./queries');
+const mutations = require('./mutations');
 
 const dependencies = { resolvers, types };
 
 const query = new GraphQLObjectType({
   name: 'Query',
   description: 'Root query',
-  fields: queryReductor(dependencies),
+  fields: objReductor(queries, dependencies),
 });
 
 const mutation = new GraphQLObjectType({
   name: 'Mutation',
   description: 'Root mutation',
-  fields: mutationReductor(dependencies),
+  fields: objReductor(mutations, dependencies),
 });
 
 module.exports = new GraphQLSchema({ query, mutation });

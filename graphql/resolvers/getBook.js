@@ -1,2 +1,1 @@
-module.exports = (_, args, context) =>
-  context.data.books.find(b => b.id === args.id);
+module.exports = (_, args, context) => context.data.book.findById(args.id);

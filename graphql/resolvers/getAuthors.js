@@ -1,1 +1,1 @@
-module.exports = (_, __, context) => context.data.authors;
+module.exports = (_, __, context) => context.data.author.findAll();
