@@ -1,4 +1,2 @@
-module.exports = (author, __, { data }) => {
-  const options = author && { where: { authorId: author.id } };
-  return data.book.findAll(options);
-};
+module.exports = (author, __, { data }) =>
+  data.book.findAll(author && { where: { authorId: author.id } });

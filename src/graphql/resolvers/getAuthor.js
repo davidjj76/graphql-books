@@ -1,4 +1,2 @@
-module.exports = (book, { id }, { data }) => {
-  const authorId = book ? book.authorId : id;
-  return data.author.findById(authorId);
-};
+module.exports = (book, { id }, { data }) =>
+  data.author.findById(book ? book.authorId : id);

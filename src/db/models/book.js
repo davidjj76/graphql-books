@@ -13,5 +13,6 @@ module.exports = ({ define, types, dependencies: { uuid } }) =>
     pages: {
       allowNull: false,
       type: types.INTEGER,
+      defaultValue: 0,
     },
   }, { indexes: [{ fields: ['title'] }] });
