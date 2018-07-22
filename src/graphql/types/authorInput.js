@@ -7,9 +7,7 @@ const {
 module.exports = new GraphQLInputObjectType({
   name: 'AuthorInput',
   description: 'Describes an author input type',
-  fields: () => {
-    return {
-      name: { type: new GraphQLNonNull(GraphQLString) },
-    };
-  },
+  fields: () => ({
+    name: { type: new GraphQLNonNull(GraphQLString) },
+  }),
 });
