@@ -1,17 +1,25 @@
-const express = require('express');
-const graphqlHTTP = require('express-graphql');
-const bodyParser = require('body-parser');
-const schema = require('./graphql/schema');
+const { ApolloServer, gql } = require('apollo-server');
+// const { typeDefs, resolvers } = require('./graphql');
 const data = require('./db')('sqlite:./db/books.sqlite3');
 
-const app = express();
-app.use(bodyParser.json());
-app.use(
-  '/graphql',
-  graphqlHTTP({
-    schema,
-    graphiql: true,
-    context: { data },
-  }),
-);
-app.listen(4000, () => console.log('Now browse to localhost:4000/graphql'));
+const typeDefs = gql`
+  type Book {
+    title: String
+    author: String
+  }
+
+  type Query {
+    books: [Book]
+  }
+
+`;
+
+const resolvers = {
+  Query: {
+    books: () => books,
+  },
+};
+
+const server = new ApolloServer({ typeDefs, resolvers, context: { data } });
+
+server.listen().then(({ url }) => console.log(`🚀  Server ready at ${url}`));
