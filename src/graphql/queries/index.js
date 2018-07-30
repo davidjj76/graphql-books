@@ -1,5 +1,5 @@
-module.exports = ({ getAuthor, getAuthors, getBook, getBooks }) => {
-  const typeDef = `
+module.exports = ({ getAuthor, getAuthors, getBook, getBooks }, { gql }) => {
+  const typeDef = gql`
     type Query
 
     extend type Query {
@@ -29,6 +29,7 @@ module.exports = ({ getAuthor, getAuthors, getBook, getBooks }) => {
       """
       getBooks: [Book!]!
     }
+
   `;
 
   const resolvers = {

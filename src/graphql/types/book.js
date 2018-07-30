@@ -1,5 +1,5 @@
-module.exports = ({ getAuthor }) => {
-  const typeDef = `
+module.exports = ({ getAuthor }, { gql }) => {
+  const typeDef = gql`
     """
     Describes a book type
     """

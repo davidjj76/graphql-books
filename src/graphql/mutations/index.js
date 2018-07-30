@@ -1,31 +1,15 @@
-module.exports = ({ createAuthor, createBook }) => {
+const { merge } = require('lodash');
+
+module.exports = (resolvers, { gql }) => {
+  const createAuthor = require('./createAuthor')(resolvers, { gql });
+  const createBook = require('./createBook')(resolvers, { gql });
+
   const typeDef = `
     type Mutation
-
-    extend type Mutation {
-      """
-      Creates a new author
-      """
-      createAuthor(author: AuthorInput!): Author!
-    }
-
-    extend type Mutation {
-      """
-      Creates a new book and an author if not exists
-      """
-      createBook(author: AuthorInput!, book: BookInput!): Book!
-    }
   `;
 
-  const resolvers = {
-    Mutation: {
-      createAuthor,
-      createBook,
-    },
-  };
-
   return {
-    typeDef,
-    resolvers,
+    typeDef: [typeDef, createAuthor.typeDef, createBook.typeDef],
+    resolvers: merge(createAuthor.resolvers, createBook.resolvers),
   };
 };
