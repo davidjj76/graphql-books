@@ -7,16 +7,18 @@ const { typeDef: Types, resolvers: typeResolvers } = require('./types')(
   resolvers,
   { gql },
 );
+
 const { typeDef: Query, resolvers: queryResolvers } = require('./queries')(
   resolvers,
-  { gql },
+  { gql, merge },
 );
+
 const {
   typeDef: Mutation,
   resolvers: mutationResolvers,
-} = require('./mutations')(resolvers, { gql });
+} = require('./mutations')(resolvers, { gql, merge });
 
 module.exports = makeExecutableSchema({
-  typeDefs: [Query, ...Mutation, ...Types],
+  typeDefs: [...Query, ...Mutation, ...Types],
   resolvers: merge(queryResolvers, mutationResolvers, ...typeResolvers),
 });

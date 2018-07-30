@@ -1,48 +1,29 @@
-module.exports = ({ getAuthor, getAuthors, getBook, getBooks }, { gql }) => {
+module.exports = (resolvers, { gql, merge }) => {
+  // TODO: extract this logic
+  const getAuthor = require('./getAuthor')(resolvers, { gql });
+  const getAuthors = require('./getAuthors')(resolvers, { gql });
+  const getBook = require('./getBook')(resolvers, { gql });
+  const getBooks = require('./getBooks')(resolvers, { gql });
+
   const typeDef = gql`
     type Query
-
-    extend type Query {
-      """
-      Gets an author by id
-      """
-      getAuthor(id: ID!): Author
-    }
-
-    extend type Query {
-      """
-      Gets all authors
-      """
-      getAuthors: [Author!]!
-    }
-
-    extend type Query {
-      """
-      Gets a book by id
-      """
-      getBook(id: ID!): Book
-    }
-
-    extend type Query {
-      """
-      Gets all books
-      """
-      getBooks: [Book!]!
-    }
-
   `;
 
-  const resolvers = {
-    Query: {
-      getAuthor,
-      getAuthors,
-      getBook,
-      getBooks,
-    },
-  };
-
   return {
-    typeDef,
-    resolvers,
+    typeDef: [
+      typeDef,
+      getAuthor.typeDef,
+      getAuthors.typeDef,
+      getBook.typeDef,
+      getBooks.typeDef,
+    ],
+    resolvers: {
+      Query: merge(
+        getAuthor.resolvers,
+        getAuthors.resolvers,
+        getBook.resolvers,
+        getBooks.resolvers,
+      ),
+    },
   };
 };

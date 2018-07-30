@@ -1,5 +1,5 @@
-module.exports = (_, { gql }) => {
-  const typeDef = gql`
+module.exports = (_, { gql }) => ({
+  typeDef: gql`
     """
     Describes a book input type
     """
@@ -7,7 +7,5 @@ module.exports = (_, { gql }) => {
       title: String!
       pages: Int
     }
-  `;
-
-  return { typeDef };
-};
+  `,
+});

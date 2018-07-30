@@ -1,5 +1,5 @@
-module.exports = ({ getBooks }, { gql }) => {
-  const typeDef = gql`
+module.exports = ({ getBooks }, { gql }) => ({
+  typeDef: gql`
     """
     Describes an author type
     """
@@ -8,16 +8,11 @@ module.exports = ({ getBooks }, { gql }) => {
       name: String!
       books: [Book!]!
     }
-  `;
+  `,
 
-  const resolvers = {
+  resolvers: {
     Author: {
       books: getBooks,
     },
-  };
-
-  return {
-    typeDef,
-    resolvers,
-  };
-};
+  },
+});
