@@ -4,15 +4,13 @@ const types = requireDirectory(module);
 module.exports = (...args) =>
   Object.keys(types).reduce(
     (acc, key) => {
-      const type =
+      const { typeDef, resolvers } =
         typeof types[key] === 'function'
           ? types[key].apply(null, args)
           : types[key];
       return {
-        typeDef: [...acc.typeDef, type.typeDef],
-        resolvers: type.resolvers
-          ? [...acc.resolvers, type.resolvers]
-          : acc.resolvers,
+        typeDef: [...acc.typeDef, typeDef],
+        resolvers: resolvers ? [...acc.resolvers, resolvers] : acc.resolvers,
       };
     },
     {
