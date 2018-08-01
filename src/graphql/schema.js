@@ -1,9 +1,9 @@
 const { makeExecutableSchema, gql } = require('apollo-server');
-const { merge } = require('lodash');
 
 const resolvers = require('./resolvers');
+const typesReductor = require('./types');
 
-const { typeDef: typeDefs, resolvers: typeResolvers } = require('./types')(
+const { typeDef: typeDefs, resolvers: typeResolvers } = typesReductor(
   resolvers,
   { gql },
 );
@@ -18,5 +18,5 @@ const mutation = gql`
 
 module.exports = makeExecutableSchema({
   typeDefs: [query, mutation, ...typeDefs],
-  resolvers: merge(...typeResolvers),
+  resolvers: typeResolvers,
 });
