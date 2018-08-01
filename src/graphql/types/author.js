@@ -1,4 +1,7 @@
-module.exports = ({ getBooks }, { gql }) => ({
+module.exports = (
+  { createAuthor, getAuthor, getAuthors, getBooks },
+  { gql },
+) => ({
   typeDef: gql`
     """
     Describes an author type
@@ -8,11 +11,37 @@ module.exports = ({ getBooks }, { gql }) => ({
       name: String!
       books: [Book!]!
     }
+
+    extend type Query {
+      """
+      Gets an author by id
+      """
+      getAuthor(id: ID!): Author
+      """
+      Gets all authors
+      """
+      getAuthors: [Author!]!
+    }
+
+    extend type Mutation {
+      """
+      Creates a new author
+      """
+      createAuthor(author: AuthorInput!): Author!
+    }
+
   `,
 
   resolvers: {
     Author: {
       books: getBooks,
+    },
+    Query: {
+      getAuthor,
+      getAuthors,
+    },
+    Mutation: {
+      createAuthor,
     },
   },
 });
