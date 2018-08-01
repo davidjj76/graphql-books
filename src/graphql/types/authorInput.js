@@ -1,11 +1,10 @@
 module.exports = (_, { gql }) => ({
   typeDef: gql`
     """
-    Describes a book input type
+    Describes an author input type
     """
-    input BookInput {
-      title: String!
-      pages: Int
+    input AuthorInput {
+      name: String!
     }
   `,
 });
