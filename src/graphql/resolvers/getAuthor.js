@@ -1,2 +1,2 @@
-module.exports = (book, { id }, { data }) =>
-  data.author.findById(book ? book.authorId : id);
+module.exports = (book, { id }, { services: { Books } }) =>
+  Books.getAuthor(book ? book.authorId : id);
