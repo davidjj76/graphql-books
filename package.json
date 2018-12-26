@@ -15,7 +15,8 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "nodemon": "^1.18.3"
+    "nodemon": "^1.18.3",
+    "prettier": "1.15.3"
   },
   "scripts": {
     "start": "nodemon src/server.js"
