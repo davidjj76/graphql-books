@@ -12,6 +12,13 @@ module.exports = (
       books: [Book!]!
     }
 
+    """
+    Describes an author input type
+    """
+    input AuthorInput {
+      name: String!
+    }
+
     extend type Query {
       """
       Gets an author by id

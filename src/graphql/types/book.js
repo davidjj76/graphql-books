@@ -13,6 +13,14 @@ module.exports = (
       pages: Int!
     }
 
+    """
+    Describes a book input type
+    """
+    input BookInput {
+      title: String!
+      pages: Int
+    }
+
     extend type Query {
       """
       Gets a book by id
