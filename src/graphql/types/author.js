@@ -1,5 +1,5 @@
 module.exports = (
-  { createAuthor, getAuthor, getAuthors, getBooks },
+  { createAuthor, deleteAuthor, getAuthor, getAuthors, getBooks },
   { gql },
 ) => ({
   typeDef: gql`
@@ -28,8 +28,11 @@ module.exports = (
       Creates a new author
       """
       createAuthor(author: AuthorInput!): Author!
+      """
+      Deletes an author by id
+      """
+      deleteAuthor(id: ID!): ID
     }
-
   `,
 
   resolvers: {
@@ -42,6 +45,7 @@ module.exports = (
     },
     Mutation: {
       createAuthor,
+      deleteAuthor,
     },
   },
 });

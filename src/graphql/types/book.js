@@ -1,4 +1,7 @@
-module.exports = ({ createBook, getAuthor, getBook, getBooks }, { gql }) => ({
+module.exports = (
+  { createBook, deleteBook, getAuthor, getBook, getBooks },
+  { gql },
+) => ({
   typeDef: gql`
     """
     Describes a book type
@@ -26,8 +29,11 @@ module.exports = ({ createBook, getAuthor, getBook, getBooks }, { gql }) => ({
       Creates a new book and an author if not exists
       """
       createBook(author: AuthorInput!, book: BookInput!): Book!
+      """
+      Deletes a book by id
+      """
+      deleteBook(id: ID!): ID
     }
-
   `,
 
   resolvers: {
@@ -40,6 +46,7 @@ module.exports = ({ createBook, getAuthor, getBook, getBooks }, { gql }) => ({
     },
     Mutation: {
       createBook,
+      deleteBook,
     },
   },
 });
