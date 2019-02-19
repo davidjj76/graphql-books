@@ -1,26 +1,60 @@
-const {
-  GraphQLID,
-  GraphQLInt,
-  GraphQLNonNull,
-  GraphQLObjectType,
-  GraphQLString,
-} = require('graphql');
+module.exports = (
+  { createBook, deleteBook, getAuthor, getBook, getBooks },
+  { gql },
+) => ({
+  typeDef: gql`
+    """
+    Describes a book type
+    """
+    type Book {
+      id: ID!
+      title: String!
+      author: Author!
+      pages: Int!
+    }
 
-const { getAuthor } = require('../resolvers');
+    """
+    Describes a book input type
+    """
+    input BookInput {
+      title: String!
+      pages: Int
+    }
 
-module.exports = new GraphQLObjectType({
-  name: 'Book',
-  description: 'Describes a book type',
-  fields: () => {
-    const author = require('./author');
-    return {
-      id: { type: new GraphQLNonNull(GraphQLID) },
-      title: { type: new GraphQLNonNull(GraphQLString) },
-      author: {
-        type: new GraphQLNonNull(author),
-        resolve: getAuthor,
-      },
-      pages: { type: new GraphQLNonNull(GraphQLInt) },
-    };
+    extend type Query {
+      """
+      Gets a book by id
+      """
+      getBook(id: ID!): Book
+      """
+      Gets all books
+      """
+      getBooks: [Book!]!
+    }
+
+    extend type Mutation {
+      """
+      Creates a new book and an author if not exists
+      """
+      createBook(author: AuthorInput!, book: BookInput!): Book!
+      """
+      Deletes a book by id
+      """
+      deleteBook(id: ID!): ID
+    }
+  `,
+
+  resolvers: {
+    Book: {
+      author: getAuthor,
+    },
+    Query: {
+      getBook,
+      getBooks,
+    },
+    Mutation: {
+      createBook,
+      deleteBook,
+    },
   },
 });

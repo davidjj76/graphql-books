@@ -1,2 +1,2 @@
-module.exports = (author, __, { data }) =>
-  data.book.findAll(author && { where: { authorId: author.id } });
+module.exports = (author, __, { services: { Books } }) =>
+  Books.getBooks(author && author.id);

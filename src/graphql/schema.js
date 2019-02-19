@@ -1,27 +1,22 @@
-const { GraphQLObjectType, GraphQLSchema } = require('graphql');
+const { makeExecutableSchema, gql } = require('apollo-server');
 
 const resolvers = require('./resolvers');
-const types = require('./types');
-const { objReductor } = require('../utils');
+const typesReductor = require('./types');
 
-const queries = require('./queries');
-const mutations = require('./mutations');
+const { typeDef: typeDefs, resolvers: typeResolvers } = typesReductor(
+  resolvers,
+  { gql },
+);
 
-const queriesReductor = objReductor(queries);
-const mutationsReductor = objReductor(mutations);
+const query = gql`
+  type Query
+`;
 
-const config = { resolvers, types };
+const mutation = gql`
+  type Mutation
+`;
 
-const query = new GraphQLObjectType({
-  name: 'Query',
-  description: 'Root query',
-  fields: queriesReductor(config),
+module.exports = makeExecutableSchema({
+  typeDefs: [query, mutation, ...typeDefs],
+  resolvers: typeResolvers,
 });
-
-const mutation = new GraphQLObjectType({
-  name: 'Mutation',
-  description: 'Root mutation',
-  fields: mutationsReductor(config),
-});
-
-module.exports = new GraphQLSchema({ query, mutation });

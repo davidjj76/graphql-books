@@ -5,7 +5,7 @@ const models = require('./models');
 const createRelations = require('./createRelations');
 const { objReductor } = require('../utils');
 
-const modelsReductor = objReductor(models);
+const modelsReductor = objReductor()(models);
 
 module.exports = connectionString => {
   const sequelize = new Sequelize(connectionString);

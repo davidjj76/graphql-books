@@ -1,1 +1,1 @@
-module.exports = (_, { id }, { data }) => data.book.findById(id);
+module.exports = (_, { id }, { services: { Books } }) => Books.getBook(id);

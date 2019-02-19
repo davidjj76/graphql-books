@@ -1,1 +1,2 @@
-module.exports = (_, { author }, { data }) => data.author.create(author);
+module.exports = (_, { author }, { services: { Books } }) =>
+  Books.createAuthor(author);

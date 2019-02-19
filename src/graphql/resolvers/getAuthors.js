@@ -1,1 +1,1 @@
-module.exports = (_, __, { data }) => data.author.findAll();
+module.exports = (_, __, { services: { Books } }) => Books.getAuthors();
